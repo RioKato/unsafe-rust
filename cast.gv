@@ -1,4 +1,3 @@
-
 digraph {
   "T" -> "&T" [label="&v"]
   "&T" -> "*const T" [label="v as *const T"]
@@ -12,4 +11,6 @@ digraph {
   "&[T]" -> "*const [T]" [label="v as *const [T]"]
   "*const [T]" -> "*const T" [label="v as *const T"]
   "*const [T]" -> "*const U" [label="v as *const U"]
+
+  "&[T]" -> "*const T" [label="v.as_ptr()", style="dotted"]
 }
