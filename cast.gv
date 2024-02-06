@@ -1,0 +1,15 @@
+
+digraph {
+  "T" -> "&T" [label="&v"]
+  "&T" -> "*const T" [label="v as *const T"]
+  "&T" -> "T" [label="*v"]
+  "*const T" -> "T" [label="*v"]
+
+  "*const T" -> "*const U" [label="v as *const U"]
+  "*const U" -> "*const T" [label="v as *const T"]
+
+  "*const T" -> "&[T]" [label="slice::from_raw_parts(v, len)"]
+  "&[T]" -> "*const [T]" [label="v as *const [T]"]
+  "*const [T]" -> "*const T" [label="v as *const T"]
+  "*const [T]" -> "*const U" [label="v as *const U"]
+}
