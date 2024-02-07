@@ -19,7 +19,7 @@ digraph {
 
   "*const U" -> "&[T]" [label="slice::from_raw_parts(*const T)", fontcolor=red, color=red]
   "*const U" -> "&CStr" [label="CStr::from_ptr(*const i8)", fontcolor=blue, color=blue]
-  "&CStr" -> "&str" [label="&CStr.to_str()", fontcolor=blue, color=blue]
+  "&CStr" -> "&str" [label="self.to_str()", fontcolor=blue, color=blue]
   "&[T]" -> "&str" [label="str::from_utf8(&[u8])", fontcolor=blue, color=blue]
-  "&str" -> "&[T]" [label="&str.as_bytes() -> &[u8]", fontcolor=blue, color=blue]
+  "&str" -> "&[T]" [label="self.as_bytes() -> &[u8]", fontcolor=blue, color=blue]
 }
