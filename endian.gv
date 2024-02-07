@@ -1,0 +1,6 @@
+digraph {
+  "LittleEndian [u8; 8]" -> "NativeEndian u64" [label="u64::from_le_bytes(v)"]
+  "NativeEndian u64" -> "LittleEndian [u8; 8]" [label="v.to_le_bytes()"]
+  "LittleEndian u64" -> "NativeEndian u64" [label="u64::from_le(v)"]
+  "NativeEndian u64" -> "LittleEndian u64" [label="v.to_le()"]
+}
