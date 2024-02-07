@@ -1,16 +1,20 @@
 digraph {
-  "T" -> "&T" [label="&v"]
-  "&T" -> "*const T" [label="v as *const T"]
-  "&T" -> "T" [label="*v"]
-  "*const T" -> "T" [label="*v"]
+  {rank=same; "&[T]"; "&str";}
+  {rank=same; "*const [T]"; "*const str";}
+  {rank=same; "&U"; "*const U";}
+  {rank=same; "U"; "W";}
+  {rank=same; "[T]"; "str";}
+  ranksep=1
+  nodesep=1
 
-  "*const T" -> "*const U" [label="v as *const U"]
-  "*const U" -> "*const T" [label="v as *const T"]
+  "&[T]" -> "*const [T]" -> "*const U"
+  "&str" -> "*const str" -> "*const U"
+  "*const U" -> "W" -> "U" -> "*const U" [dir=both]
+  "*const U" -> "&U" [dir=back]
 
-  "*const T" -> "&[T]" [label="slice::from_raw_parts(v, len)"]
-  "&[T]" -> "*const [T]" [label="v as *const [T]"]
-  "*const [T]" -> "*const T" [label="v as *const T"]
-  "*const [T]" -> "*const U" [label="v as *const U"]
+  "U" -> "&U" [style=dotted]
+  "*const [T]" -> "[T]" -> "&[T]" [style=dotted]
+  "*const str" -> "str" -> "&str" [style=dotted]
 
-  "&[T]" -> "*const T" [label="v.as_ptr()", style="dotted"]
+  "*const U" -> "&[T]" [label="slice::from_raw_parts(var as *const T)", fontcolor=red, color=red]
 }
