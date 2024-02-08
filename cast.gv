@@ -19,10 +19,13 @@ digraph {
   "*const [U; N]" -> "W" [dir=both]
   "&U" -> "*const U"
 
-  "U" -> "&U" [style=dotted]
-  "*const [U; N]" -> "[U; N]" -> "&[U; N]" [style=dotted]
-  "*const [T]" -> "[T]" -> "&[T]" [style=dotted]
-  "*const str" -> "str" -> "&str" [style=dotted]
+  "U" -> "&U" [style=dotted, dir=both]
+  "*const [U; N]" -> "[U; N]" [style=dotted]
+  "[U; N]" -> "&[U; N]" [style=dotted, dir=both]
+  "*const [T]" -> "[T]" [style=dotted]
+  "[T]" -> "&[T]" [style=dotted, dir=both]
+  "*const str" -> "str" [style=dotted]
+  "str" -> "&str" [style=dotted, dir=both]
 
   "*const U" -> "&[T]" [label="slice::from_raw_parts(*const T)", fontcolor=red, color=red]
   "*const U" -> "&CStr" [label="CStr::from_ptr(*const i8)", fontcolor=blue, color=blue]
