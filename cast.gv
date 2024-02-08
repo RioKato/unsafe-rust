@@ -2,8 +2,8 @@ digraph {
   node [ordering=out];
   {rank=same; "&[T]"; "&str";}
   {rank=same; "*const [T]"; "*const str";}
-  {rank=same; "*const U"; "&[X; Y]"; "&U";}
-  {rank=same; "[X; Y]"; "W"; "U";}
+  {rank=same; "*const U"; "&[U; N]"; "&U";}
+  {rank=same; "[U; N]"; "W"; "U";}
   {rank=same; "[T]"; "str";}
   ranksep=1
   nodesep=0.8
@@ -12,11 +12,15 @@ digraph {
   "&str" -> "*const str" -> "*const U"
   "*const [T]" -> "*const str" [dir=both]
   "*const U" -> "W" -> "U" -> "*const U" [dir=both]
-  "&[X; Y]" -> "*const U"
+  "&[U; N]" -> "*const U"
+  "&[U; N]" -> "*const [U; N]"
+  "*const [U; N]" -> "*const U" [dir=both]
+  "*const [U; N]" -> "U" [dir=both]
+  "*const [U; N]" -> "W" [dir=both]
   "&U" -> "*const U"
 
   "U" -> "&U" [style=dotted]
-  "[X; Y]" -> "&[X; Y]" [style=dotted]
+  "*const [U; N]" -> "[U; N]" -> "&[U; N]" [style=dotted]
   "*const [T]" -> "[T]" -> "&[T]" [style=dotted]
   "*const str" -> "str" -> "&str" [style=dotted]
 
