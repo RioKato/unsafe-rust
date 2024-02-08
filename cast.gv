@@ -2,11 +2,11 @@ digraph {
   node [ordering=out];
   {rank=same; "&[T]"; "&str";}
   {rank=same; "*const [T]"; "*const str";}
-  {rank=same; "*const U"; "&[U; N]"; "&U";}
+  {rank=same; "*const U"; "*const [U; N]"; "&[U; N]"; "&U";}
   {rank=same; "[U; N]"; "W"; "U";}
   {rank=same; "[T]"; "str";}
   ranksep=1
-  nodesep=0.8
+  nodesep=1
 
   "&[T]" -> "*const [T]" -> "*const U"
   "&str" -> "*const str" -> "*const U"
