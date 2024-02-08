@@ -1,8 +1,9 @@
 digraph {
+  node [ordering=out];
   {rank=same; "&[T]"; "&str";}
   {rank=same; "*const [T]"; "*const str";}
-  {rank=same; "&U"; "*const U";}
-  {rank=same; "U"; "W"; "&CStr";}
+  {rank=same; "*const U"; "&[X; Y]"; "&U";}
+  {rank=same; "[X; Y]"; "W"; "U";}
   {rank=same; "[T]"; "str";}
   ranksep=1
   nodesep=0.8
@@ -11,15 +12,17 @@ digraph {
   "&str" -> "*const str" -> "*const U"
   "*const [T]" -> "*const str" [dir=both]
   "*const U" -> "W" -> "U" -> "*const U" [dir=both]
-  "*const U" -> "&U" [dir=back]
+  "&[X; Y]" -> "*const U"
+  "&U" -> "*const U"
 
   "U" -> "&U" [style=dotted]
+  "[X; Y]" -> "&[X; Y]" [style=dotted]
   "*const [T]" -> "[T]" -> "&[T]" [style=dotted]
   "*const str" -> "str" -> "&str" [style=dotted]
 
   "*const U" -> "&[T]" [label="slice::from_raw_parts(*const T)", fontcolor=red, color=red]
   "*const U" -> "&CStr" [label="CStr::from_ptr(*const i8)", fontcolor=blue, color=blue]
-  "&CStr" -> "&str" [label="self.to_str()", fontcolor=blue, color=blue]
+  "&CStr" -> "&str" [label="to_str()", fontcolor=blue, color=blue]
   "&[T]" -> "&str" [label="str::from_utf8(&[u8])", fontcolor=blue, color=blue]
-  "&str" -> "&[T]" [label="self.as_bytes() -> &[u8]", fontcolor=blue, color=blue]
+  "&str" -> "&[T]" [label="as_bytes() -> &[u8]", fontcolor=blue, color=blue]
 }
